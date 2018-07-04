@@ -6,8 +6,8 @@
  */
 function createProposition(playerOffer, npcOffer){
     return Object.freeze({
-        playerOffer: playerOffer,
-        npcOffer: npcOffer
+        playerOffer: Object.freeze(Array.from(playerOffer)),
+        npcOffer: Object.freeze(Array.from(npcOffer))
     });
 }
 module.exports = createProposition;
