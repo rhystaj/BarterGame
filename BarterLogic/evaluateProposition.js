@@ -17,7 +17,7 @@ function evaluateProposition(proposition){
     proposition.npcOffer.forEach(e => totalNpcValue += e.value);
 
 
-    return totalNpcValue - totalPlayerValue;
+    return totalPlayerValue - totalNpcValue;
 
 }
 module.exports = evaluateProposition;
