@@ -5,7 +5,7 @@ function removePlayerItemFromProposition(item, proposition, sortingCriteria){
     /* If the item is not contained within the proposition, return it, along with that information.*/
     if(!proposition.playerOffer.includes(item)){
         return Object.freeze({
-            objectInOffer: false,
+            itemInOffer: false,
             resultingProposition: proposition
         });
     }
@@ -20,7 +20,7 @@ function removePlayerItemFromProposition(item, proposition, sortingCriteria){
     /* Create the new proposition and return it along with that the given item was in the proposition. */
     const newProposition = createProposition(newPlayerOffer, propsition.npcOffer);
     return Object.freeze({
-        objectInOffer: true,
+        itemInOffer: true,
         resultingProposition: newProposition
     });
 
