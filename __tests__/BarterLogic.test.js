@@ -1,6 +1,6 @@
 
 const createValuedItem = require('../BarterLogic/createValuedItem');
-const createProposition = require('../BarterLogic/createProposition')
+const createProposition = require('../BarterLogic/Propositions/createProposition')
 const evaluateProposition = require('../BarterLogic/evaluateProposition');
 
 const offer1 = [
