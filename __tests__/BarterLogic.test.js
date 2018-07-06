@@ -3,6 +3,7 @@ const createValuedItem = require('../BarterLogic/createValuedItem');
 const createProposition = require('../BarterLogic/Propositions/createProposition')
 const evaluateProposition = require('../BarterLogic/evaluateProposition');
 const addPlayerItemToProposition = require('../BarterLogic/Propositions/addPlayerItemToProposition');
+const removePlayerItemFromProposition = require('../BarterLogic/Propositions/removePlayerItemFromProposition');
 
 const offer1 = [
     createValuedItem('A', 'a', 50),
@@ -41,7 +42,6 @@ test("If two offers have the same value, the proposition value should be 0", () 
 
 
 //addPlayerItemToProposition
-
 const expectedPlayerOfferAfterAdd = Array.from(offer1);
 expectedPlayerOfferAfterAdd.push(createValuedItem('N', 'n', 120));
 Object.freeze(expectedPlayerOfferAfterAdd);
@@ -58,4 +58,26 @@ Object.freeze(expectedPlayerOfferAfterAddSorted);
 test("The player's offer is correctly sorted after an item is added.", () => {
     let expectedProposition = createProposition(expectedPlayerOfferAfterAddSorted, offer2);
     expect(addPlayerItemToProposition(createValuedItem('N', 'n', 120), createProposition(offer1, offer2), (a, b) => a.value - b.value)).toEqual(expectedProposition);
+});
+
+
+//removePlayerItemFromProposition
+test("False and the unmodified proposition will be returned if an item to be removed from a player's offer is not there.", () => {
+    expect(removePlayerItemFromProposition(createValuedItem('N', 'n', 120), createProposition(offer1, offer2), (a,b) => 0)).toEqual({
+        itemInOffer: false,
+        resultingProposition: createProposition(offer1, offer2)
+    });
+});
+
+const expectedPlayerOfferAfterRemove = [
+    createValuedItem('A', 'a', 50),
+    createValuedItem('C', 'c', 167)
+];
+
+test("True and the modified proposition will be returned when an item is sucessfully removed from a player's offer.", () => {
+    let expectedProposition = createProposition(expectedPlayerOfferAfterRemove, offer2);
+    expect(removePlayerItemFromProposition(createValuedItem('B', 'b', 205), createProposition(offer1, offer2), (a,b) => 0)).toEqual({
+        itemInOffer: true,
+        resultingProposition: expectedProposition
+    });
 });
