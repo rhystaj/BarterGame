@@ -50,6 +50,6 @@ test('Given item is added to the given proposition.', () => {
     const expectedProposition = createProposition(expectedPlayerOffer, offer2);
 
 
-    expect(addPlayerItemToProposition(createValuedItem('N', 'n', 120), createProposition(offer1, offer2), () => true)).toBe(expectedProposition);
+    expect(addPlayerItemToProposition(createValuedItem('N', 'n', 120), createProposition(offer1, offer2), () => false)).toEqual(expectedProposition);
 
 });
