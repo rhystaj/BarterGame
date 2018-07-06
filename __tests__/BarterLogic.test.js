@@ -41,15 +41,21 @@ test("If two offers have the same value, the proposition value should be 0", () 
 
 
 //addPlayerItemToProposition
+
+const expectedPlayerOfferAfterAdd = Array.from(offer1);
+expectedPlayerOfferAfterAdd.push(createValuedItem('N', 'n', 120));
+Object.freeze(expectedPlayerOfferAfterAdd);
+
 test('Given item is added to the given proposition.', () => {
-    
-    /* Generate expected output: A proposition with 'N' added to the end of the player's offer. */
-    const expectedPlayerOffer = Array.from(offer1);
-    expectedPlayerOffer.push(createValuedItem('N', 'n', 120));
-
-    const expectedProposition = createProposition(expectedPlayerOffer, offer2);
-
-
+    let expectedProposition = createProposition(expectedPlayerOfferAfterAdd, offer2);
     expect(addPlayerItemToProposition(createValuedItem('N', 'n', 120), createProposition(offer1, offer2), () => false)).toEqual(expectedProposition);
+});
 
+const expectedPlayerOfferAfterAddSorted = Array.from(expectedPlayerOfferAfterAdd);
+expectedPlayerOfferAfterAddSorted.sort((a, b) => a.value - b.value);
+Object.freeze(expectedPlayerOfferAfterAddSorted);
+
+test("The player's offer is correctly sorted after an item is added.", () => {
+    let expectedProposition = createProposition(expectedPlayerOfferAfterAddSorted, offer2);
+    expect(addPlayerItemToProposition(createValuedItem('N', 'n', 120), createProposition(offer1, offer2), (a, b) => a.value - b.value)).toEqual(expectedProposition);
 });
