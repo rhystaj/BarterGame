@@ -25,3 +25,4 @@ function removePlayerItemFromProposition(item, proposition, sortingCriteria){
     });
 
 }
+module.exports = removePlayerItemFromProposition;

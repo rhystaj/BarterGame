@@ -20,3 +20,4 @@ function addPlayerItemToProposition(item, proposition, sortingCriteria){
     return createProposition(newPlayerList, proposition.npcOffer);
 
 }
+module.exports = addPlayerItemToProposition;
