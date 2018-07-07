@@ -7,7 +7,7 @@ function objectsEqual(a, b){
     
     if(a === b) {return true}
 
-    
+
     /* If both are strings, but not equal, this function would just endlessly recurse unless explicity told to stop. */
     if(typeof(a) === 'string' && typeof(b) === 'string'){
         return false
@@ -17,7 +17,6 @@ function objectsEqual(a, b){
     /* Get Keys from both objects, if there are any */
     const aKeys = Object.keys(a);
     const bKeys = Object.keys(b);
-    console.log("[" + aKeys.length + " - " + bKeys.length + "]");
 
 
     if(aKeys.length !== bKeys.length) { return false; }
