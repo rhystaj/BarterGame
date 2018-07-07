@@ -1,4 +1,5 @@
 const objectsEqual = require('../BarterLogic/Util/objectsEqual');
+const findIndexOf = require('../BarterLogic/Util/findIndexOf');
 
 
 //objectsEqual
@@ -43,3 +44,17 @@ test("objectsEqual will return false for objects that aren't equal.", () => {
     expect(objectsEqual(obj1, obj8)).toBe(false);
 });
 
+
+//findIndexOf
+test('findIndexOf works on arrays of primitives.', () => {
+    expect(findIndexOf(3, [5, 2, 3, 5, 7])).toBe(2);
+    expect(findIndexOf('a', ['q', 'a', '7'])).toBe(1);
+});
+
+test('findIndexOf works on arrays of more complex items.', () => {
+    expect(findIndexOf(obj1, [obj3, obj8, obj2, arr3, obj7])).toBe(2);
+});
+
+test("findIndexOf returns -1 if item is not in array.", () => {
+    expect(findIndexOf(obj1, [obj3, obj8, arr3, obj7])).toBe(-1);
+});
