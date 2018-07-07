@@ -5,12 +5,18 @@
  */
 function objectsEqual(a, b){
     
-    if(a === b) {return true}
+    if(a === b) { return true; }
 
 
-    /* If both are strings, but not equal, this function would just endlessly recurse unless explicity told to stop. */
+    /* If items are not directly equal, but one is undefined or null, they are not equal. */
+    if(a === undefined || b === undefined || a === null || b === null){
+        return false;
+    }
+
+
+    /* If both are strings, but not directly equal, this function would just endlessly recurse unless explicity told to stop. */
     if(typeof(a) === 'string' && typeof(b) === 'string'){
-        return false
+        return false;
     }
 
 
@@ -24,10 +30,11 @@ function objectsEqual(a, b){
 
 
     /* Compare each of the values in the objects, and determine that objects are equals, if all thier key values are equal. */
+    let result = true;
     aKeys.forEach(key => {
-        if(!objectsEqual(a[key], b[key])) { return false; }
+        if(!objectsEqual(a[key], b[key])) { result = false; }
     });
-    return true;
+    return result;
 
 }
 module.exports = objectsEqual;
